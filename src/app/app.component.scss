@@ -1,0 +1,19 @@
+.main {
+    display: flex;
+    flex-direction: row;
+
+    div {
+        border: solid;
+        border-color: grey;
+        margin: 10px;
+        height: 100%;
+    }
+}
+
+.rack {
+    width: 300px;
+}
+
+.condition {
+    width: 710px;
+}

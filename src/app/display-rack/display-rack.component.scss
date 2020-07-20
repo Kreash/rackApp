@@ -1,0 +1,81 @@
+
+*{
+    margin: 3px;
+}
+
+.lable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rack {
+    display: flex;
+    flex-direction: row;
+}
+
+.shelfBox {
+    width: 100%;
+    height: 70px;
+}
+
+.shelf {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+    height: 70px;
+    h1 {
+        margin: 0;
+    }
+    z-index: 1;
+}
+
+.dragBtn {
+    display: none;
+    position: relative;
+    height: 64px;
+    width: 20px;
+
+}
+.dragBtn:before{
+    height: 20px;
+    width: 4px;
+    content: '';
+    background-color: rgb(77, 179, 77);
+    position: absolute;
+    left: 8px;
+    top: 22px;
+}
+.dragBtn:after{
+    height: 4px;
+    width: 20px;
+    content: '';
+    background-color: rgb(77, 179, 77);
+    position: absolute;
+    left: 0;
+    top: 30px;
+}
+
+.dragBtnVisible {
+    display: block;
+}
+
+.load {
+    margin-bottom: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    margin-top: 0;
+    border: solid;
+    color: blue;
+}
+
+.product {
+    cursor: grab;
+    z-index: 1000;
+}
