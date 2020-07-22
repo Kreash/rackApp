@@ -73,7 +73,6 @@ export class DisplayRackComponent {
   }
 
   shiftOnOtherShelf(shelfTwo) {
-    const shelfOrderOne = this.currentShelf.shelfOrder;
     const productOrderOne = this.currentProduct.productOrder;
     const shelfOrderTwo = shelfTwo.shelfOrder;
 
