@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService,  Shelf  } from 'src/app/http.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-root',
@@ -10,54 +11,58 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpService) {}
 
-  data: Shelf[];
+  shelfs: Shelf[] = [
+    {
+      shelfId: null,
+      shelfOrder: 0,
+      products: []
+    },
+    {
+      shelfId: null,
+      shelfOrder: 1,
+      products: []
+    },
+    {
+      shelfId: null,
+      shelfOrder: 2,
+      products: []
+    },
+    {
+      shelfId: null,
+      shelfOrder: 3,
+      products: []
+    },
+    {
+      shelfId: null,
+      shelfOrder: 4,
+      products: []
+    }
+  ];
 
   ngOnInit() {
-    this.http.getData().subscribe(data => {
-      this.data = JSON.parse(JSON.stringify(data));
-      console.log('First data: ', data);
+    // Cекретный ключ добавлен в .gitignore файл.
+    this.http.getData('https://api.jsonbin.io/b/5e6b40e207f1954acedf3427/1', environment.secretKey).subscribe(shelfs => {
+      shelfs.forEach(shelf => {
+        this.shelfs[this.shelfs.findIndex((item) => {
+          return item.shelfOrder === shelf.shelfOrder;
+        })] = shelf;
+      });
 
-      this.fillShelfs(data);
+    this.filterShelf();
+    })
 
+
+  }
+
+  filterShelf(){
+    this.shelfs.forEach((shelf) => {
+      let arr = new Array(shelf.products.length);
+      for (let key in shelf.products){
+        arr[shelf.products[key].productOrder - 1] = shelf.products[key];
+      }
+      shelf.products = arr;
     })
   }
 
-  fillShelfs(data){
-    let arr = [0,1,2,3,4];
-
-    for (let item in data) {
-      for (let i in arr){
-        if(data[item].shelfOrder == arr[i]){
-          arr.splice(+i, 1) 
-        }
-      }
-    }
-
-    for (let i in arr){
-      let j = arr[i];
-      this.data.push(this.createShelf(j));
-    }
-  }
-
-  createShelf(order){
-    return {
-      shelfId: null,
-      shelfOrder: order,
-      products: []
-    }
-  }
-
-  // Функционлан удаления Url для удобства представления состояния стелажа.
-
-  // deleteUrl = function(obj){
-  //   for (let key in obj ){
-  //     if(typeof obj[key] == 'object'){
-  //       this.deleteUrl(obj[key]);
-  //     } else if(typeof obj[key] == 'number'){
-  //     } else if (typeof obj[key] == 'string'){
-  //       obj[key] = '...';
-  //     }
-  //   }
-  // }
-
 }
+
