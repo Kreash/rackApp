@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService,  Shelf  } from 'src/app/http.service'
+import { HttpService, Shelf } from 'src/app/http.service'
 import { environment } from 'src/environments/environment'
 
 @Component({
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment'
 })
 export class AppComponent implements OnInit {
 
-  constructor(private http: HttpService) {}
+
 
   shelfs: Shelf[] = [
     {
@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
     }
   ];
 
+  constructor(private http: HttpService) { }
+
   ngOnInit() {
     // Cекретный ключ добавлен в .gitignore файл.
     this.http.getData('https://api.jsonbin.io/b/5e6b40e207f1954acedf3427/1', environment.secretKey).subscribe(shelfs => {
@@ -48,17 +50,16 @@ export class AppComponent implements OnInit {
         })] = shelf;
       });
 
-    this.filterShelf();
+      this.filterShelf();
     })
-
 
   }
 
-  filterShelf(){
+  filterShelf() {
     this.shelfs.forEach((shelf) => {
       let arr = new Array(shelf.products.length);
-      for (let key in shelf.products){
-        arr[shelf.products[key].productOrder - 1] = shelf.products[key];
+      for (let product of shelf.products) {
+        arr[product.productOrder - 1] = product
       }
       shelf.products = arr;
     })

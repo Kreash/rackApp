@@ -5,9 +5,9 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './display-condition.component.html',
   styleUrls: ['./display-condition.component.scss']
 })
-export class DisplayConditionComponent{
+export class DisplayConditionComponent {
 
-@Input() display;
+  @Input() display;
 
 }
 
