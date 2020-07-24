@@ -89,6 +89,7 @@ export class DisplayRackComponent {
         product.productOrder += -1;
       }
     })
+    this.dragBtnIsVisible = false;
   }
 
 }
